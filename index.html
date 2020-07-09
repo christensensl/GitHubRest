@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GithubAPI</title>
+</head>
+<body>
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading -->
+    <h1 class="my-4">Page Heading
+      <small>Secondary Text</small>
+    </h1>
+
+    <!-- Project One -->
+    <div class="row">
+      <div class="col-md-7">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+        </a>
+      </div>
+        <div class="col-md-5">
+          <h3>Project One</h3>
+          <button id = 'btnRepos'>Get Repositories</button>
+          <p class="main__info", id = 'divResult'>Info:</p>
+        </div>
+    </div>
+ 
+  </div>
+  <script>
+    const btnRepos = document.getElementById("btnRepos");
+    const divResult = document.getElementById("divResult");
+    btnRepos.addEventListener("click", getRepos);
+    
+    async function getRepos() {
+      const url = "https://api.github.com/users/christensensl/repos";
+      const response = await fetch(url);
+      const result = await response.json();
+      
+
+      result.forEach(i=>{
+        const anchor = document.createElement("a");
+        anchor.href = i.html_url; 
+        anchor.textContent = i.name;
+        divResult.appendChild(document.createElement("br"));
+        divResult.appendChild(anchor);
+        divResult.appendChild(document.createElement("br"));
+      
+      });
+    };
+  </script>
+</body>  <!-- /.container -->
+</html>
